@@ -1,0 +1,9 @@
+.dark-tile{
+    background-color: green;
+    padding: 1.5rem;
+}
+
+.light-tile{
+    background-color: beige;
+    padding: 1.5rem;
+}

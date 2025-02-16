@@ -8,7 +8,7 @@ export const BoardTile = ({children, id, occupied, piece}) => {
             className={!color ? 'dark-tile' : 'light-tile'}
             id={id}
             >
-                {children}
+                {occupied ? piece : children}
                 
         </div>
     )

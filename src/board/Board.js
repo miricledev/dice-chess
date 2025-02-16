@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BoardTile } from './BoardTile';
 import './board.css'
+import Pawn from '../pieces/Pawn/Pawn';
 
 const Board = () => {
 
@@ -15,15 +16,22 @@ const Board = () => {
         ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"]
       ];
 
-    const boardTiles = chessboard.map((row, index) => {
+    const boardTiles = chessboard.map((row, rowIndex) => {
 
         return(
-            <div id={index} className='board-row'>
-                {row.map(tile => {
+            <div id={rowIndex} className='board-row'>
+                {row.map((tile, tileIndex) => {
+                    let piece = null;
+                    const id = `${rowIndex}${tileIndex}`
+                    // allocating pieces to their starting positions
+                    if(tile[1] == '2' || tile[1] == 7){
+                        piece = <Pawn id={id} color={tile[1] == '2' ? true : false} />
+                    }
+
                     return (<BoardTile 
                                 id={tile} 
-                                occupied={false}
-                                piece={null}
+                                occupied={piece ? true : false}
+                                piece={piece}
                                 >{tile}
                             </BoardTile>)}
                 )}
@@ -31,13 +39,15 @@ const Board = () => {
                 )
             }
         )
+
+    const [selectedpPiece, setSelectedPiece] = useState()
         
-        return(
-            <div className='board'>
-                {boardTiles}
-            </div>
-            
-        )
+    return(
+        <div className='board'>
+            {boardTiles}
+        </div>
+        
+    )
     }
 
   
